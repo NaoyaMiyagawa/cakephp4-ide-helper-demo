@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  web:
+    build:
+      context: ./server/docker/web
+      args:
+        - WWW_USER_ID=${WWW_USER_ID:-1000}
+        - WWW_GROUP_ID=${WWW_GROUP_ID:-1000}
+    container_name: ${COMPOSE_PROJECT_NAME:-${APP_NAME}}_web
+    volumes:
+      - ./:/var/www/html
+      - ./server/docker/web/php.ini:/usr/local/etc/php/php.ini
+    ports:
+      - ${PORT_HTTP:-80}:80
+      - ${PORT_HTTPS:-443}:443
+    networks:
+      - backend
+
+  db:
+    build: ./server/docker/db
+    container_name: ${COMPOSE_PROJECT_NAME:-${APP_NAME}}_db
+    volumes:
+      - db-store:/var/lib/postgresql/data:delegated
+    ports:
+      - ${PORT_DB:-5432}:5432
+    environment:
+      - POSTGRES_DB=${DB_DATABASE:-${APP_NAME}}
+      - POSTGRES_USER=${DB_USERNAME:-postgres}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-postgres}
+    networks:
+      - backend
+
+volumes:
+  db-store:
+
+networks:
+  backend:
+    driver: bridge
