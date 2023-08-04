@@ -1,0 +1,13 @@
+name: Run PHPStan
+
+runs:
+  using: composite
+
+  steps:
+    - name: Install PHPStan
+      run: composer require --dev phpstan/phpstan phpstan/extension-installer cakedc/cakephp-phpstan
+      shell: bash
+
+    - name: Run PHPStan
+      run: composer stan
+      shell: bash

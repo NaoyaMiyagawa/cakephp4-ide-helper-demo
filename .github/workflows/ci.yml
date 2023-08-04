@@ -3,87 +3,39 @@ name: CI
 on:
   push:
     branches:
-      - '4.x'
-      - '4.next'
-      - '5.x'
+      - main
   pull_request:
     branches:
-      - '*'
+      - "**"
 
 permissions:
   contents: read
 
+defaults:
+  run:
+    working-directory: ./backend
+
 jobs:
-  testsuite:
-    runs-on: ubuntu-18.04
-    strategy:
-      fail-fast: false
-      matrix:
-        php-version: ['7.4', '8.0', '8.1']
-    name: PHP ${{ matrix.php-version }}
-
+  php--testsuite:
+    name: PHPUnit
+    runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/php/setup
+      - uses: ./.github/actions/php/run-phpunit
 
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: ${{ matrix.php-version }}
-        extensions: mbstring, intl, pdo_sqlite
-        coverage: none
-
-    - name: Composer install
-      run: |
-        if [[ ${{ matrix.php-version }} == '8.1' ]]; then
-          composer update --ignore-platform-reqs
-        else
-          composer update
-        fi
-        composer run-script post-install-cmd --no-interaction
-
-    - name: Run PHPUnit
-      run: |
-        cp config/app_local.example.php config/app_local.php
-        vendor/bin/phpunit
-      env:
-        DATABASE_TEST_URL: sqlite://./testdb.sqlite
-
-  coding-standard:
+  php--coding-standard:
     name: Coding Standard
-    runs-on: ubuntu-18.04
-
+    runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/php/setup
+      - uses: ./.github/actions/php/run-cakephp-code-sniffer
 
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '7.4'
-        extensions: mbstring, intl
-        coverage: none
-
-    - name: Composer install
-      run: composer install
-
-    - name: Run PHP CodeSniffer
-      run: composer cs-check
-
-  static-analysis:
+  php--static-analysis:
     name: Static Analysis
-    runs-on: ubuntu-18.04
-
+    runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v3
-
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '7.4'
-        extensions: mbstring, intl
-        coverage: none
-
-    - name: Composer install
-      run: composer require --dev phpstan/phpstan:^1.0.0
-
-    - name: Run phpstan
-      run: vendor/bin/phpstan
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/php/setup
+      - uses: ./.github/actions/php/run-phpstan
