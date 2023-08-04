@@ -5,7 +5,7 @@ runs:
 
   steps:
     - name: Install CodeSniffer
-      run: composer require --dev cakephp/cakephp-codesniffer
+      run: composer require --dev cakephp/cakephp-codesniffer:^4.5
       shell: bash
 
     - name: Run PHP CodeSniffer
