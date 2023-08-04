@@ -52,7 +52,8 @@
         "sort-packages": true,
         "allow-plugins": {
             "cakephp/plugin-installer": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpstan/extension-installer": true
         }
     }
 }
