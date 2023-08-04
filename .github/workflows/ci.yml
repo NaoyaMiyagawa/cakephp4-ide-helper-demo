@@ -30,4 +30,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/php/setup
-      - uses: ./.github/actions/php/run-cakephp-code-sniffer
+      - uses: ./.github/actions/php/rsun-cakephp-code-sniffer
