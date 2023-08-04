@@ -1,0 +1,46 @@
+name: Setup CakePHP
+
+runs:
+  using: composite
+
+  steps:
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2 # https://github.com/shivammathur/setup-php
+      with:
+        php-version: "8.1"
+        extensions: mbstring, intl, pdo_sqlite
+        coverage: none
+
+    - name: Setup .env
+      run: cp config/.env.ci config/.env
+      shell: bash
+
+    - name: Setup CakePHP Config
+      run: cp config/app_local.example.php config/app_local.php
+      shell: bash
+
+    # https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#example-using-the-cache-action
+    - name: Cache vendor
+      id: cache-vendor
+      uses: actions/cache@v3
+      env:
+        cache-name: cache-vendor
+      with:
+        path: ~/vendor
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+
+    - if: ${{ steps.cache-vendor.outputs.cache-hit != 'true' }}
+      name: Composer install
+      run: composer install --ignore-platform-reqs --no-dev
+      shell: bash
+
+    - name: Display versions
+      run: |
+        php -v && echo ''
+        composer -V && echo ''
+        echo 'CakePHP: ' && bin/cake version
+      shell: bash

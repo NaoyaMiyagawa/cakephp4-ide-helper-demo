@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - "**"
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: ./backend
+
+jobs:
+  php--testsuite:
+    name: PHPUnit
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/php/setup
+      - uses: ./.github/actions/php/run-phpunit
+
+  php--coding-standard:
+    name: Coding Standard
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/php/setup
+      - uses: ./.github/actions/php/run-cakephp-code-sniffer

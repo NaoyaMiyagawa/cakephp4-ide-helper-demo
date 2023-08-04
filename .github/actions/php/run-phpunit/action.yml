@@ -1,0 +1,15 @@
+name: Run PHPUnit
+
+runs:
+  using: composite
+
+  steps:
+    - name: Install PHPUnit
+      run: composer require --dev phpunit/phpunit
+      shell: bash
+
+    - name: Run PHPUnit
+      run: composer test
+      env:
+        DATABASE_TEST_URL: sqlite://./testdb.sqlite
+      shell: bash
