@@ -1,0 +1,17 @@
+name: Run CakePHP IDE Helper
+
+runs:
+  using: composite
+
+  steps:
+    - name: Install IDE Helper
+      run: composer require --dev cakephp/cakephp-codesniffer
+      shell: bash
+
+    - name: Create Database For ide-helper
+      run: bin/cake migrations migrate
+      shell: bash
+
+    - name: Run ide-helper
+      run: composer annotate-check
+      shell: bash

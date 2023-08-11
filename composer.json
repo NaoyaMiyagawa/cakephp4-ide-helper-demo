@@ -45,6 +45,8 @@
         ],
         "cs-check": "phpcs --colors -p  src/ tests/",
         "cs-fix": "phpcbf --colors -p src/ tests/",
+        "annotate-check": "RESULT=$(bin/cake annotate all -r -d); echo \"$RESULT\"; NEEDS_FORMAT=$(echo \"$RESULT\"| grep -e 'added' -e 'updated' -e 'removed'); if [ ! \"$NEEDS_FORMAT\" ]; then echo \"\n\\e[30;42m[Success] IdeHelper: Nothing to annotate.\\e[m\n\"; exit 0; else echo \"\n\\e[41m[Error] IdeHelper: Detected code to annotate. Please run 'composer annotate-fix'.\\e[m\n\"; exit 2; fi;",
+        "annotate-fix": "bin/cake annotate all -r",
         "test": "phpunit --colors=always"
     },
     "prefer-stable": true,
