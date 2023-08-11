@@ -1,10 +1,17 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\User[]|\Cake\Collection\CollectionInterface $users
+ * @var object $firstUser
+ * @var mixed $userCount
  */
 ?>
+
 <div class="users index content">
+    <?= h($firstUser->name) ?><br>
+    All: <?= $this->Number->format($userCount) ?>
+
     <?= $this->Html->link(__('New User'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Users') ?></h3>
     <div class="table-responsive">
@@ -20,19 +27,19 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($users as $user): ?>
-                <tr>
-                    <td><?= $this->Number->format($user->id) ?></td>
-                    <td><?= h($user->loginid) ?></td>
-                    <td><?= h($user->name) ?></td>
-                    <td><?= h($user->created) ?></td>
-                    <td><?= h($user->modified) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
-                    </td>
-                </tr>
+                <?php foreach ($users as $user) : ?>
+                    <tr>
+                        <td><?= $this->Number->format($user->id) ?></td>
+                        <td><?= h($user->loginid) ?></td>
+                        <td><?= h($user->name) ?></td>
+                        <td><?= h($user->created) ?></td>
+                        <td><?= h($user->modified) ?></td>
+                        <td class="actions">
+                            <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
+                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
+                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
+                        </td>
+                    </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>

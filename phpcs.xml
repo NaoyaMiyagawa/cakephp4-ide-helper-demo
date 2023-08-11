@@ -2,5 +2,28 @@
 <ruleset name="App">
     <config name="installed_paths" value="../../cakephp/cakephp-codesniffer"/>
 
-    <rule ref="CakePHP"/>
+    <!-- Colorize output -->
+    <arg name="colors" />
+    <!-- [Options] p: show progress  s: show error rules -->
+    <arg value="ps" />
+
+    <rule ref="PSR12" />
+
+    <rule ref="CakePHP">
+        <!-- CakePHP -->
+        <exclude name="CakePHP.Commenting.FunctionComment.MissingParamComment" />
+        <!-- SlevomatCodingStandard -->
+        <exclude name="SlevomatCodingStandard.Commenting.DisallowOneLinePropertyDocComment.OneLinePropertyComment" />
+        <exclude name="SlevomatCodingStandard.Commenting.DocCommentSpacing.IncorrectLinesCountBetweenDescriptionAndAnnotations" />
+        <exclude name="SlevomatCodingStandard.Namespaces.FullyQualifiedClassNameInAnnotation.NonFullyQualifiedClassName" />
+        <exclude name="SlevomatCodingStandard.PHP.UselessParentheses.UselessParentheses" />
+        <exclude name="SlevomatCodingStandard.TypeHints.DeclareStrictTypes.IncorrectWhitespaceBeforeDeclare" />
+    </rule>
+
+    <rule ref="SlevomatCodingStandard.Namespaces.UnusedUses">
+        <!-- to see types in phodcs -->
+        <properties>
+            <property name="searchAnnotations" type="boolean" value="true" />
+        </properties>
+    </rule>
 </ruleset>

@@ -13,6 +13,7 @@ use Cake\ORM\Entity;
  * @property string $name
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
+ * @property bool $password_reset_flag
  */
 class User extends Entity
 {
