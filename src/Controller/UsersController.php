@@ -9,6 +9,7 @@ namespace App\Controller;
  *
  * @property \App\Model\Table\UsersTable $Users
  * @method \App\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @property \App\Controller\Component\HogeComponent $Hoge
  */
 class UsersController extends AppController
 {
