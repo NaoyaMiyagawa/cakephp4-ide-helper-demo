@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -11,6 +12,13 @@ namespace App\Controller;
  */
 class UsersController extends AppController
 {
+    /** @inheritDoc */
+    public function initialize(): void
+    {
+        parent::initialize();
+        $this->loadComponent('Hoge');
+    }
+
     /**
      * Index method
      *
@@ -19,8 +27,10 @@ class UsersController extends AppController
     public function index()
     {
         $users = $this->paginate($this->Users);
+        $firstUser = $this->Users->find()->first();
+        $userCount = $this->Users->find()->count();
 
-        $this->set(compact('users'));
+        $this->set(compact('users', 'firstUser', 'userCount'));
     }
 
     /**
