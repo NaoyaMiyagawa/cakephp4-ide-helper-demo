@@ -1,53 +1,19 @@
-# CakePHP Application Skeleton
+# CakePHP4 IDE Helper DEMO
 
-![Build Status](https://github.com/cakephp/app/actions/workflows/ci.yml/badge.svg?branch=master)
-[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/app.svg?style=flat-square)](https://packagist.org/packages/cakephp/app)
-[![PHPStan](https://img.shields.io/badge/PHPStan-level%207-brightgreen.svg?style=flat-square)](https://github.com/phpstan/phpstan)
+This is a sample CakePHP4 app using [dereuromark/cakephp-ide-helper](https://github.com/dereuromark/cakephp-ide-helper).
+Take look at on how to introduce and how to execute on CI (GitHub Actions).
 
-A skeleton for creating applications with [CakePHP](https://cakephp.org) 4.x.
+- [Introduce CakePHP IDE Helper by NaoyaMiyagawa · Pull Request \#3](https://github.com/NaoyaMiyagawa/cakephp4-ide-helper-demo/pull/3)
+- [Setup CI for IDE Helper by NaoyaMiyagawa · Pull Request \#4](https://github.com/NaoyaMiyagawa/cakephp4-ide-helper-demo/pull/4)
+- [IDE Helper usage sample by NaoyaMiyagawa · Pull Request \#5](https://github.com/NaoyaMiyagawa/cakephp4-ide-helper-demo/pull/5)
 
-The framework source code can be found here: [cakephp/cakephp](https://github.com/cakephp/cakephp).
+For more details, please check the article below.
+- [CakePHPにIDE Helperを導入しIDE補完で開発効率を上げる⚡️【CI連携】](https://qiita.com/NaoyaMiyagawa/items/8344fd7f0e406475341c)
 
-## Installation
+<br>
 
-1. Download [Composer](https://getcomposer.org/doc/00-intro.md) or update `composer self-update`.
-2. Run `php composer.phar create-project --prefer-dist cakephp/app [app_name]`.
+## Environment
 
-If Composer is installed globally, run
+- CakePHP: 4.4.15
+- PHP: 8.1.20
 
-```bash
-composer create-project --prefer-dist cakephp/app
-```
-
-In case you want to use a custom app dir name (e.g. `/myapp/`):
-
-```bash
-composer create-project --prefer-dist cakephp/app myapp
-```
-
-You can now either use your machine's webserver to view the default home page, or start
-up the built-in webserver with:
-
-```bash
-bin/cake server -p 8765
-```
-
-Then visit `http://localhost:8765` to see the welcome page.
-
-## Update
-
-Since this skeleton is a starting point for your application and various files
-would have been modified as per your needs, there isn't a way to provide
-automated upgrades, so you have to do any updates manually.
-
-## Configuration
-
-Read and edit the environment specific `config/app_local.php` and setup the 
-`'Datasources'` and any other configuration relevant for your application.
-Other environment agnostic settings can be changed in `config/app.php`.
-
-## Layout
-
-The app skeleton uses [Milligram](https://milligram.io/) (v1.3) minimalist CSS
-framework by default. You can, however, replace it with any other library or
-custom styles.
