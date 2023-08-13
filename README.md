@@ -1,6 +1,6 @@
 # CakePHP4 IDE Helper DEMO
 
-This is a sample CakePHP4 app using [dereuromark/cakephp-ide-helper](https://github.com/dereuromark/cakephp-ide-helper).
+This is a sample CakePHP4 app using [dereuromark/cakephp-ide-helper](https://github.com/dereuromark/cakephp-ide-helper).<br>
 Take look at on how to introduce and how to execute on CI (GitHub Actions).
 
 - [Introduce CakePHP IDE Helper by NaoyaMiyagawa · Pull Request \#3](https://github.com/NaoyaMiyagawa/cakephp4-ide-helper-demo/pull/3)
